@@ -46,6 +46,15 @@ body {
   padding: 1%;
 }
 
+.control{
+  margin: 0;
+  list-style: none;
+  position: relative;
+  top: 50%;
+  left: 5%0;
+  transform: translate(-50%, -50%);
+}
+
 .dialogue_wrapper{
   position: fixed;
   bottom: 0;

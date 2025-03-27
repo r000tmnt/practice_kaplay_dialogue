@@ -35,6 +35,21 @@ const conversation = [
     bg: 'cave',
     options: [],
     // transition: []
+  },
+  {
+    person: {
+      name: '',
+      sprite: ''
+    },
+    dialogue: 'Need more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more words',
+    bg: 'cave',
+    options: [
+      {
+        label: 'option 1',
+        value: 'option_1',
+      }
+    ],
+    // transition: []
   }
 ]
 
@@ -63,6 +78,7 @@ function App() {
   // const ui = document.querySelector(".ui");
 
   const [isVisible, setIsVisible] = useState(false)
+  const [showOptions, setShowOptions] = useState(false)
 
   // Dialouge state
   const [name, setName] = useState('')
@@ -76,6 +92,12 @@ function App() {
   const [people] = useState([{}, {}, {}])
 
   const uiRef = useRef(null);
+
+  const optionClick = (value) => {
+    setShowOptions(false)
+    setIsVisible(true)
+    console.log(value)
+  }
 
   const scaleUI = () => {
     console.log(uiRef)
@@ -143,12 +165,20 @@ function App() {
       timer.cancel()
       setDialogue(conversation[index].dialogue)
     }else{
-      const next = index + 1
-      if(conversation[next]){
-        setDialogue('')
-        displayDialogue(next)
-        setIndex(next)
+      // Check if option exit
+      if(conversation[index].options.length){
+        // Display options
+        setShowOptions(true)
+        setIsVisible(false)
+      }else{
+        const next = index + 1
+        if(conversation[next]){
+          setDialogue('')
+          displayDialogue(next)
+          setIndex(next)
+        }  
       }
+
     }
   }
 
@@ -174,6 +204,17 @@ function App() {
       {
         // Add your UI here
       }
+      <ul className="control" style={{ visibility: isVisible ? 'visible' : 'hidden' }}>
+        {/* <li v-for="opt in conversarion" key="e" onClick={optionClick}>{  }</li> */}
+        {
+          conversation[index].options.map((opt, i) => {
+            return (
+              <li key={i} onClick={optionClick(opt.value)}>{ opt.label }</li>
+            )
+          })
+        }
+      </ul>
+
       <div 
         className='dialogue_wrapper' 
         style={{ visibility: isVisible ? 'visible' : 'hidden' }}
