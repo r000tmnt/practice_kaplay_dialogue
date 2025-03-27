@@ -67,6 +67,7 @@ function App() {
   // Dialouge state
   const [name, setName] = useState('')
   const [dialogue, setDialogue] = useState('')
+  const [timer, setTimer] = useState()
   const [speed, setSpeed] = useState(0.1)
   const [index, setIndex] = useState(0)
 
@@ -113,28 +114,41 @@ function App() {
 
       // if (conversation[index].person.vfx){}
 
-      if(conversation[index].person){
+      if(conversation[index].person.name.length ){
         setName(conversation[index].person.name)
       }
 
       // Dispalay dialouge
-      loop(speed, () => {
-        setDialogue((prevDialogue) => {
-          return conversation[index].dialogue.slice(0, prevDialogue.length + 1)
-        })
-      }, 
-      // max loop
-      conversation[index].dialogue.length)
+      setTimer(
+        loop(speed, () => {
+          setDialogue((prevDialogue) => {
+            return conversation[index].dialogue.slice(0, prevDialogue.length + 1)
+          })
+        }, 
+        // max loop
+        conversation[index].dialogue.length)
+      )
+
+      // Cancel the event when the loop is finished
+      // timer.onEnd(() => timer.cancel())
     }
   }
 
   const handleContinue = () => {
     console.log('clicked')
-    const next = index + 1
-    if(conversation[next]){
-      setDialogue('')
-      displayDialogue(next)
-      setIndex(next)
+    console.log(timer)
+
+    if(dialogue.length < conversation[index].dialogue.length){
+      timer.paused = true
+      timer.cancel()
+      setDialogue(conversation[index].dialogue)
+    }else{
+      const next = index + 1
+      if(conversation[next]){
+        setDialogue('')
+        displayDialogue(next)
+        setIndex(next)
+      }
     }
   }
 
