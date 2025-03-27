@@ -28,6 +28,16 @@ body {
   background-color: black;
 }
 
+.disable-scrollbars::-webkit-scrollbar {
+  background: transparent; /* Chrome/Safari/Webkit */
+  width: 0;
+}
+
+.disable-scrollbars {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
 .name_tag{
   width: fit-content;
   position: absolute;
@@ -52,6 +62,7 @@ body {
   margin: 0 auto;
   padding: 1%;
   overflow: hidden;
+  overflow-y: scroll;
 }
 
 /* #root {
