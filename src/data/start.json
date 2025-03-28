@@ -1,0 +1,85 @@
+{
+    "0": {
+        "person": {
+          "name": "Unknown",
+          "sprite": "test"
+        },
+        "dialogue": "Hello there!",
+        "bg": "cave",
+        "options": [],
+        "transition": null
+      },
+    "1": {
+        "person": {
+          "name": "",
+          "sprite": ""
+        },
+        "dialogue": "Anyway. Here is a longer sentence that I want to display on the screen. I hope it works.",
+        "bg": "cave",
+        "options": [],
+        "transition": null
+      },      
+    "2": {
+        "person": {
+            "name": "",
+            "sprite": ""
+          },
+        "dialogue": "Well. I need a much longer one to work with. Just enough to test the scrollbars. placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...",
+        "bg": "cave",
+        "options": [],
+        "transition": null
+      },
+    "3": {
+        "person": {
+            "name": "",
+            "sprite": ""
+          },
+        "dialogue": "Need more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more words",
+        "bg": "cave",
+        "options": [
+          {
+            "label": "option 1",
+            "next": 4,
+            "flag": "option_1"
+          },
+          {
+            "label": "option 2",
+            "next": 5,
+            "flag": "option_2"
+          }
+        ],
+        "transition": null
+      },
+    "4":  {
+        "person": {
+            "name": "Unknown",
+            "sprite": ""
+          },
+        "dialogue": "I see. You choosed the first one.",
+        "bg": "cave",
+        "options": [],
+        "transition": null,
+        "requiredFlag": "option_1"
+    },
+    "5": {
+        "person": {
+            "name": "Unknown",
+            "sprite": ""
+          },
+        "dialogue": "Oh, you pick the second one, right?",
+        "bg": "cave",
+        "options": [],
+        "transition": null,
+        "requiredFlag": "option_2"
+    },
+    "6": {
+        "person": {
+            "name": "",
+            "sprite": ""
+          },
+        "dialogue": "Now you see. The is a basic example of dialogue system. Build with json and JavaScript. Have fun.",
+        "bg": "cave",
+        "options": [],
+        "transition": null
+    }
+}
