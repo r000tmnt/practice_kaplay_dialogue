@@ -6,7 +6,7 @@
         },
         "dialogue": "Hello there!",
         "bg": "cave",
-        "options": [],
+        "option": [],
         "transition": null
       },
     "1": {
@@ -16,7 +16,7 @@
         },
         "dialogue": "Anyway. Here is a longer sentence that I want to display on the screen. I hope it works.",
         "bg": "cave",
-        "options": [],
+        "option": [],
         "transition": null
       },      
     "2": {
@@ -26,7 +26,7 @@
           },
         "dialogue": "Well. I need a much longer one to work with. Just enough to test the scrollbars. placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...",
         "bg": "cave",
-        "options": [],
+        "option": [],
         "transition": null
       },
     "3": {
@@ -36,7 +36,7 @@
           },
         "dialogue": "Need more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more words",
         "bg": "cave",
-        "options": [
+        "option": [
           {
             "label": "option 1",
             "next": 4,
@@ -57,7 +57,7 @@
           },
         "dialogue": "I see. You choosed the first one.",
         "bg": "cave",
-        "options": [],
+        "option": [],
         "transition": null,
         "requiredFlag": "option_1"
     },
@@ -68,7 +68,7 @@
           },
         "dialogue": "Oh, you pick the second one, right?",
         "bg": "cave",
-        "options": [],
+        "option": [],
         "transition": null,
         "requiredFlag": "option_2"
     },
@@ -79,7 +79,7 @@
           },
         "dialogue": "Now you see. The is a basic example of dialogue system. Build with json and JavaScript. Have fun.",
         "bg": "cave",
-        "options": [],
+        "option": [],
         "transition": null
     }
 }

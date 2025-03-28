@@ -40,7 +40,7 @@ function App() {
   // const ui = document.querySelector(".ui");
 
   const [isVisible, setIsVisible] = useState(false)
-  const [showOptions, setShowOptions] = useState(false)
+  const [showOption, setShowOption] = useState(false)
 
   // Dialouge state
   const [name, setName] = useState('')
@@ -100,7 +100,7 @@ function App() {
 
   // #region Option Click
   const optionClick = (option) => {
-    setShowOptions(false)
+    setShowOption(false)
     console.log(option)
 
     // Set flag. Set points...etc.
@@ -124,7 +124,7 @@ function App() {
 
   useEffect(() => {
     // Check current option
-    const theOption = conversation[index].options.find(opt => {
+    const theOption = conversation[index].option.find(opt => {
       if(opt.flag && flag[opt.flag]) return opt
     })
 
@@ -135,7 +135,7 @@ function App() {
 
   useEffect(() => {
     // Check current option
-    const theOption = conversation[index].options.find(opt => {
+    const theOption = conversation[index].option.find(opt => {
       if(opt.point && Object.entries(opt.point).find(p =>  point[p[0]])) return opt
     })
     
@@ -223,9 +223,9 @@ function App() {
         setDialogue(conversation[index].dialogue)
       }else{
         // Check if option exit
-        if(conversation[index].options.length){
-          // Display options
-          setShowOptions(true)
+        if(conversation[index].option.length){
+          // Display option
+          setShowOption(true)
           setName('')
           setIsVisible(false)
         }else{
@@ -252,31 +252,31 @@ function App() {
       }
       <ul className="control">
         <li>
-          <button onClick={() => setMode('SKIP')}>
+          <button onClick={() => setMode('SKIP')} style={(mode.length && mode !== 'SKIP')? { opacity: 0.5 } : {}}>
             <IoPlaySkipForward />
           </button>
         </li>
         <li>
-          <button onClick={() => setMode('AUTO')}>
+          <button onClick={() => setMode('AUTO')} style={(mode.length && mode !== 'AUTO')? { opacity: 0.5 } : {}}>
             <MdAutoMode />
           </button>
         </li>
         <li>
-          <button onClick={() => setMode('HIDE')}>
+          <button onClick={() => setMode('HIDE')} style={(mode.length && mode !== 'HIDE')? { opacity: 0.5 } : {}}>
             <BiHide />
           </button>
         </li>
         <li>
-          <button onClick={() => setMode('LOG')}>
+          <button onClick={() => setMode('LOG')} style={(mode.length && mode !== 'LOG')? { opacity: 0.5 } : {}}>
             <LuLogs />
           </button>
         </li>
       </ul>
 
-      <ul className="option center text-center" style={{ visibility: showOptions ? 'visible' : 'hidden' }}>
+      <ul className="option center text-center" style={{ visibility: showOption ? 'visible' : 'hidden' }}>
         {/* <li v-for="opt in conversarion" key="e" onClick={optionClick}>{  }</li> */}
         {
-          conversation[index].options.map((opt, i) => {
+          conversation[index].option.map((opt, i) => {
             return (
               <li className='bg-white' key={i} onClick={() => optionClick(opt)}>{ opt.label }</li>
             )
