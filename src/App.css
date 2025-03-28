@@ -28,6 +28,25 @@ body {
   background-color: black;
 }
 
+.bg-white {
+  background-color: white;
+}
+
+.text-center {
+  text-align: center;
+}
+
+ul{
+  padding: 0;
+  list-style: none;
+}
+
+.center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .disable-scrollbars::-webkit-scrollbar {
   background: transparent; /* Chrome/Safari/Webkit */
   width: 0;
@@ -39,20 +58,29 @@ body {
 }
 
 .name_tag{
+  position: relative;
   width: fit-content;
-  position: absolute;
-  top: 0;
-  transform: translate(5%, -50%);
   padding: 1%;
 }
 
-.control{
+/* .control{
   margin: 0;
   list-style: none;
   position: relative;
   top: 50%;
   left: 5%0;
   transform: translate(-50%, -50%);
+} */
+
+.option{
+  width: 30%
+}
+
+.option > li{
+  margin: 2rem 0;
+  padding: 1%;
+  font-size: 1.5rem;
+  color: black;
 }
 
 .dialogue_wrapper{
@@ -62,7 +90,7 @@ body {
   height: 25%;
   font-size: 1.5rem;
   font-weight: 500;
-  transform: translateY(-5%);
+  transform: translateY(-20%);
 }
 
 .dialogue{
@@ -72,6 +100,7 @@ body {
   padding: 1%;
   overflow: hidden;
   overflow-y: scroll;
+  transform: translateY(-5%);
 }
 
 /* #root {
