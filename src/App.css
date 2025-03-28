@@ -41,6 +41,10 @@ ul{
   list-style: none;
 }
 
+li{
+  padding: 1%;
+}
+
 .center{
   position: absolute;
   top: 50%;
@@ -63,14 +67,15 @@ ul{
   padding: 1%;
 }
 
-/* .control{
-  margin: 0;
-  list-style: none;
-  position: relative;
-  top: 50%;
-  left: 5%0;
-  transform: translate(-50%, -50%);
-} */
+.control{
+  float: right;
+  margin-right: 1%;
+}
+
+.control > li{
+  margin: 1.2rem 0;
+  font-size: 1.5rem;
+}
 
 .option{
   width: 30%
@@ -78,7 +83,6 @@ ul{
 
 .option > li{
   margin: 2rem 0;
-  padding: 1%;
   font-size: 1.5rem;
   color: black;
 }

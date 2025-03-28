@@ -5,6 +5,12 @@ import k from './lib/kaplay';
 // Dialouge object
 import dialogue from './data/dialogue';
 
+//react-icons
+import { IoPlaySkipForward } from "react-icons/io5";
+import { MdAutoMode } from "react-icons/md";
+import { BiHide } from "react-icons/bi";
+import { LuLogs } from "react-icons/lu";
+
 const { scene, loadSprite, add, pos, sprite, go, wait, loop } = k
 
 const conversation = dialogue.start
@@ -45,6 +51,7 @@ function App() {
   const [flag, setFlag] = useState({})
   const [point, setPoint] = useState({})
   const [clickLock, setClickLock] = useState(false)
+  const [mode, setMode] = useState('')
 
   // Sprite state
   const [bg, setBg] = useState({})
@@ -243,6 +250,29 @@ function App() {
       {
         // Add your UI here
       }
+      <ul className="control">
+        <li>
+          <button onClick={() => setMode('SKIP')}>
+            <IoPlaySkipForward />
+          </button>
+        </li>
+        <li>
+          <button onClick={() => setMode('AUTO')}>
+            <MdAutoMode />
+          </button>
+        </li>
+        <li>
+          <button onClick={() => setMode('HIDE')}>
+            <BiHide />
+          </button>
+        </li>
+        <li>
+          <button onClick={() => setMode('LOG')}>
+            <LuLogs />
+          </button>
+        </li>
+      </ul>
+
       <ul className="option center text-center" style={{ visibility: showOptions ? 'visible' : 'hidden' }}>
         {/* <li v-for="opt in conversarion" key="e" onClick={optionClick}>{  }</li> */}
         {
