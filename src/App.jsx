@@ -44,6 +44,7 @@ function App() {
   const [index, setIndex] = useState(0)
   const [flag, setFlag] = useState({})
   const [point, setPoint] = useState({})
+  const [clickLock, setClickLock] = useState(false)
 
   // Sprite state
   const [bg, setBg] = useState({})
@@ -87,7 +88,7 @@ function App() {
       console.log('show dialogue box')
       displayDialogue(index)
     }
-  }, [isVisible])
+  }, [isVisible, index])
   // #endregion
 
   // #region Option Click
@@ -136,10 +137,10 @@ function App() {
 
   // Go to the next part where the option leads to
   const proceedWithOption = (next) => {
+    console.log('clear dialogue box by option')
     setDialogue('')
     setIndex(next)
     setIsVisible(true)
-    displayDialogue(next)
   } 
   // #endregion
 
@@ -205,26 +206,33 @@ function App() {
   const handleContinue = () => {
     console.log('clicked')
     console.log(timer)
-
-    if(dialogue.length < conversation[index].dialogue.length){
-      timer.paused = true
-      timer.cancel()
-      setDialogue(conversation[index].dialogue)
-    }else{
-      // Check if option exit
-      if(conversation[index].options.length){
-        // Display options
-        setShowOptions(true)
-        setName('')
-        setIsVisible(false)
+    
+    if(!clickLock){
+      setClickLock(true)
+      
+      if(dialogue.length < conversation[index].dialogue.length){
+        timer.paused = true
+        timer.cancel()
+        setDialogue(conversation[index].dialogue)
       }else{
-        const next = index + 1
-        if(conversation[next]){
-          setDialogue('')
-          displayDialogue(next)
-          setIndex(next)
-        }  
-      }
+        // Check if option exit
+        if(conversation[index].options.length){
+          // Display options
+          setShowOptions(true)
+          setName('')
+          setIsVisible(false)
+        }else{
+          const next = index + 1
+          if(conversation[next]){
+            console.log('clear dialogue box by click')
+            setDialogue('')
+            setIndex(next)
+          }  
+        }
+      }  
+      
+      // Prevent click rapidly
+      wait(0.5, () => setClickLock(false))
     }
   }
   // #endregion
