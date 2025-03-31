@@ -11,7 +11,7 @@
       },
     "1": {
         "person": {
-          "name": "",
+          "name": "Unknown",
           "sprite": ""
         },
         "dialogue": "Anyway. Here is a longer sentence that I want to display on the screen. I hope it works.",
@@ -21,7 +21,7 @@
       },      
     "2": {
         "person": {
-            "name": "",
+            "name": "Unknown",
             "sprite": ""
           },
         "dialogue": "Well. I need a much longer one to work with. Just enough to test the scrollbars. placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...",
@@ -31,7 +31,7 @@
       },
     "3": {
         "person": {
-            "name": "",
+            "name": "Unknown",
             "sprite": ""
           },
         "dialogue": "Need more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more words",
@@ -74,7 +74,7 @@
     },
     "6": {
         "person": {
-            "name": "",
+            "name": "Unknown",
             "sprite": ""
           },
         "dialogue": "Now you see. The is a basic example of dialogue system. Build with json and JavaScript. Have fun.",
