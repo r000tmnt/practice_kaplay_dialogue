@@ -107,6 +107,11 @@ li{
   transform: translateY(-5%);
 }
 
+.log{
+  position: absolute;
+  top: 0
+}
+
 /* #root {
   max-width: 1280px;
   margin: 0 auto;
