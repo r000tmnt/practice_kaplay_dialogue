@@ -26,9 +26,12 @@ const { scene, loadSprite, add, pos, sprite, go, wait, loop } = k
 const conversation = dialogue.start
 
 const initScene = () => {
+  // Scenes can accept argument from go()
   scene('game', () => {
     // Load sprites
-    loadSprite('test', 'portrait/unknow.png')
+    loadSprite('test', 'portrait/unknow_sprite_sheet.png', {
+      sliceX: 2
+    })
     loadSprite('cave', 'bg/cave.png')
 
     // Create sprites
@@ -184,12 +187,17 @@ function App() {
       }
 
       const peopleIndex = conversation[index].person.order? conversation[index].person.order - 1 : 0
+      const person = conversation[index].person
 
       if(!Object.entries(people[peopleIndex]).length){
-        people[peopleIndex] = add([sprite(conversation[index].person.sprite), pos(0, 0)])
+        people[peopleIndex] = add([sprite(person.sprite, { frame: person.frame || 0 }), pos(0, 0)])
       } else {
-        if(conversation[index].person.sprite.length) people[peopleIndex].sprite = conversation[index].person.sprite
-      }
+        if (person.frame && person.frame !== people[peopleIndex].frame) people[peopleIndex].frame = person.frame
+
+        if(conversation[index].person.sprite !== person.sprite) {
+          people[peopleIndex].use(sprite(person.sprite, { frame: person.frame || 0 }))
+        }
+      }      
 
       people[peopleIndex].flipX = conversation[index].person.flipX
       people[peopleIndex].flipY = conversation[index].person.flipY
