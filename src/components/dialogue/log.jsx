@@ -1,16 +1,18 @@
 // Dialogue store
-import dialogueStore, { setMode } from '../../store/dialogue';
+import { setMode } from '../../store/dialogue';
+import { useSelector, useDispatch } from 'react-redux';
 
 function DialogueLog ({ dispalyLog }) {
   // Dialouge state
-  const {
-    log,
-  } = dialogueStore.getState()
+  const log = useSelector(state => state.log)
+  const dispatch = useDispatch()
 
     return (
         <>
             <div className="log" style={{ display: dispalyLog? 'block' : 'none' }}>
-                <button onClick={() => dialogueStore.dispatch(setMode(''))}>X</button>
+                <div class="close-btn">
+                    <button onClick={() => dispatch(setMode(''))}>X</button>
+                </div>
 
                 <div>
                     {
