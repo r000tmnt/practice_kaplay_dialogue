@@ -13,7 +13,7 @@
     "1": {
         "person": {
           "name": "Unknown",
-          "sprite": "test"
+          "sprite": ""
         },
         "dialogue": "Anyway. Here is a longer sentence that I want to display on the screen. I hope it works.",
         "bg": "cave",
@@ -23,7 +23,7 @@
     "2": {
         "person": {
             "name": "Unknown",
-            "sprite": "test"
+            "sprite": ""
           },
         "dialogue": "Well. I need a much longer one to work with. Just enough to test the scrollbars. placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...placeholder...",
         "bg": "cave",
@@ -33,7 +33,7 @@
     "3": {
         "person": {
             "name": "Unknown",
-            "sprite": "test"
+            "sprite": ""
           },
         "dialogue": "Need more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more wordsNeed more words",
         "bg": "cave",
@@ -54,7 +54,7 @@
     "4":  {
         "person": {
             "name": "Unknown",
-            "sprite": "test"
+            "sprite": ""
           },
         "dialogue": "I see. You choosed the first one.",
         "bg": "cave",
@@ -65,7 +65,7 @@
     "5": {
         "person": {
             "name": "Unknown",
-            "sprite": "test"
+            "sprite": ""
           },
         "dialogue": "Oh, you pick the second one, right?",
         "bg": "cave",
@@ -76,7 +76,7 @@
     "6": {
       "person": {
         "name": "Unknown",
-        "sprite": "test"
+        "sprite": ""
       },
       "dialogue": "Let's try something else. Would you like to...",
       "bg": "cave",
@@ -97,7 +97,7 @@
     "7": {
       "person": {
         "name": "Unknown",
-        "sprite": "test",
+        "sprite": "",
         "frame": 1
       },
       "dialogue": "Okay. Did it work?",
@@ -109,10 +109,10 @@
     "8": {
       "person": {
         "name": "Unknown",
-        "sprite": "test"
+        "sprite": ""
       },
       "dialogue": "Agree. It is too dark in here.",
-      "bg": "cave",
+      "bg": "cave_colored",
       "option": [],
       "transition": null,
       "requiredFlag": "change_bg"
@@ -120,10 +120,10 @@
     "9": {
         "person": {
             "name": "Unknown",
-            "sprite": "test"
+            "sprite": ""
           },
         "dialogue": "Now you see. The is a basic example of dialogue system. Build with json and JavaScript. Have fun.",
-        "bg": "cave",
+        "bg": "",
         "option": [],
         "transition": null
     }
