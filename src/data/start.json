@@ -90,6 +90,11 @@
           "label": "Change the background image",
           "next": 8,
           "flag": "change_bg"
+        },
+        {
+          "label": "Rotate the sprite",
+          "next": 9,
+          "flag": "rotate_sprite"
         }
       ],
       "transition": null
@@ -118,6 +123,22 @@
       "requiredFlag": "change_bg"
     },
     "9": {
+      "person": {
+        "name": "Unknown",
+        "sprite": "",
+        "animate": {
+          "rotate": {
+            "direction": "forward"
+          }
+        }
+      },
+      "dialogue": "Whoa------! STOP it!",
+      "bg": "",
+      "option": [],
+      "transition": null,
+      "requiredFlag": "rotate_sprite"
+    },
+    "10": {
         "person": {
             "name": "Unknown",
             "sprite": ""

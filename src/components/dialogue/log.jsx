@@ -10,7 +10,7 @@ function DialogueLog ({ dispalyLog }) {
     return (
         <>
             <div className="log" style={{ display: dispalyLog? 'block' : 'none' }}>
-                <div class="close-btn">
+                <div className="close-btn">
                     <button onClick={() => dispatch(setMode(''))}>X</button>
                 </div>
 

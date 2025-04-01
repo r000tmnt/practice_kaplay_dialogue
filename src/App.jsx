@@ -21,7 +21,19 @@ import dialogueStore, {
 import DialogueControl from './components/dialogue/control';
 import DialogueLog from './components/dialogue/log';
 
-const { scene, loadSprite, add, pos, sprite, go, wait, loop } = k
+const { 
+  scene, 
+  loadSprite, 
+  add, 
+  pos, 
+  sprite, 
+  go, 
+  wait, 
+  loop,
+  opacity,
+  rotate,
+  animate
+} = k
 
 const conversation = dialogue.start
 
@@ -190,8 +202,15 @@ function App() {
       const peopleIndex = conversation[index].person.order? conversation[index].person.order - 1 : 0
       const person = conversation[index].person
 
+      // If the character is not redered yet
       if(!Object.entries(people[peopleIndex]).length){
-        people[peopleIndex] = add([sprite(person.sprite, { frame: person.frame || 0 }), pos(0, 0)])
+        people[peopleIndex] = add([
+          sprite(person.sprite, { frame: person.frame || 0 }), 
+          pos(0, 0),
+          opacity(1),
+          rotate(0),
+          animate()
+        ])
       } else {
         if (person.frame && person.frame !== people[peopleIndex].frame) people[peopleIndex].frame = person.frame
 
@@ -207,6 +226,21 @@ function App() {
 
       if(conversation[index].person.name && conversation[index].person.name !== name){
         dispatch(setName(conversation[index].person.name)) 
+      }
+
+      // If there is animation to play
+      if(person.animate){
+        const animation_name = Object.entries(person.animate)[0][0]
+
+        if(animation_name === 'rotate'){
+          people[peopleIndex].animate("angle", [0, 360], {
+            duration: 2,
+            direction: person.anition[animation_name].direction,
+            // loops: 1
+          })
+
+          people[peopleIndex].animate.seek(0)
+        }
       }
 
       // Dispalay dialouge
@@ -260,6 +294,11 @@ function App() {
           dispatch(setName(''))
           setIsVisible(false)
         }else{
+
+          if(conversation[index].transition){
+            // If there are transitions to play
+          }
+
           const next = index + 1
           if(conversation[next]){
             dispatch(setLog(`${name.length? `${name}: ` : ''}${dialogue}`))
