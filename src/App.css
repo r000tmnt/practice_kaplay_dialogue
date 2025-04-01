@@ -17,6 +17,7 @@ body {
   transform: translate(-50%, -50%) scale(var(--scale, 0));
   transform-origin: center;
   box-sizing: border-box;
+  overflow: hidden;
   z-index: 10;
 }
 
@@ -45,12 +46,26 @@ li{
   padding: 1%;
 }
 
+p {
+  word-break: break-all;
+}
+
 .center{
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.flex {
+  display: flex;
+}
+
+.close-btn{
+  width: fit-content;
+  margin-left: auto;
+}
+
 .disable-scrollbars::-webkit-scrollbar {
   background: transparent; /* Chrome/Safari/Webkit */
   width: 0;
@@ -109,8 +124,20 @@ li{
 
 .log{
   position: absolute;
-  top: 0
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 3%;
+  background-color: rgba(0, 0, 0, 0.75);
+  font-size: 1.5rem;
+  box-sizing: border-box;
+  overflow-y: scroll;
 }
+
+/* .log > button {
+  float: right;
+  margin-right: 1%;
+} */
 
 /* #root {
   max-width: 1280px;
