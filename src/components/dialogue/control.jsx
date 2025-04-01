@@ -5,7 +5,7 @@ import { BiHide } from "react-icons/bi";
 import { LuLogs } from "react-icons/lu";
 
 // Dialogue store
-import dialogueStore, { setMode } from "../../store/dialogue";
+import { setMode } from "../../store/dialogue";
 import { useSelector, useDispatch } from 'react-redux';
 
 function DialogueControl ({ isVisible }) {
