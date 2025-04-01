@@ -33,6 +33,7 @@ const initScene = () => {
       sliceX: 2
     })
     loadSprite('cave', 'bg/cave.png')
+    loadSprite('cave_colored', 'bg/cave_colored.png')
 
     // Create sprites
     // const cave = add([sprite('cave'), pos(0, 0)])
@@ -181,8 +182,8 @@ function App() {
 
       // Create sprites
       if(!bg.sprite) setBg(add([sprite(conversation[index].bg), pos(0, 0)]))
-
-      if(bg.sprite !== conversation[index].bg){
+      else
+      if(conversation[index].bg.length && bg.sprite !== conversation[index].bg){
         bg.sprite = conversation[index].bg
       }
 
@@ -194,7 +195,7 @@ function App() {
       } else {
         if (person.frame && person.frame !== people[peopleIndex].frame) people[peopleIndex].frame = person.frame
 
-        if(conversation[index].person.sprite !== person.sprite) {
+        if(person.sprite.length && person.sprite !== conversation[index].person.sprite) {
           people[peopleIndex].use(sprite(person.sprite, { frame: person.frame || 0 }))
         }
       }      
@@ -261,7 +262,7 @@ function App() {
         }else{
           const next = index + 1
           if(conversation[next]){
-            dispatch(setLog(`${name.length? `${name}:` : ''}${dialogue}`))
+            dispatch(setLog(`${name.length? `${name}: ` : ''}${dialogue}`))
             console.log('clear dialogue box by click')
             dispatch(setDialogue(''))
             dispatch(setIndex(next))
@@ -294,6 +295,7 @@ function App() {
       break;  
       case 'LOG':
         setDisplayLog((preState) => !preState)
+        setIsVisible((preState) => !preState)
       break;
       default:
         setIsVisible(true)
@@ -341,10 +343,10 @@ function App() {
 
       <div 
         className='dialogue_wrapper' 
-        style={{ visibility: isVisible ? 'visible' : 'hidden' }}
+        style={{ visibility: isVisible? 'visible' : 'hidden' }}
         onClick={handleContinue}  
       >
-        <div className='name_tag border bg-black' style={ name.length? { visibility: 'visible', zIndex: 11 } : { visibility: 'hidden' } }>
+        <div className='name_tag border bg-black' style={{ visibility: isVisible? 'visible' : 'hidden', zIndex: name.length? 11 : -1 }}>
           { name }
         </div>
         <div className='dialogue border bg-black disable-scrollbars'>
