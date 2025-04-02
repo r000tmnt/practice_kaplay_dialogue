@@ -16,9 +16,9 @@ function DialogueLog ({ dispalyLog }) {
 
                 <div>
                     {
-                        log.map((node) => {
+                        log.map((node, i) => {
                             return (
-                                <p key={node}>{ node }</p>
+                                <p key={i}>{ node }</p>
                             )
                         })
                     }
