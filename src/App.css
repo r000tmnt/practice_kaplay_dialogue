@@ -96,6 +96,11 @@ p {
   width: 30%
 }
 
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Relative_colors */
+.option_disabled {
+  background-color: rgb(from white 200 200 200);
+}
+
 .option > li{
   margin: 2rem 0;
   font-size: 1.5rem;
