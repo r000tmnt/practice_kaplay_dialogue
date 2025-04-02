@@ -139,11 +139,67 @@
       "requiredFlag": "rotate_sprite"
     },
     "10": {
+      "person": {
+        "name": "Unknown",
+        "sprite": ""
+      },
+      "dialogue": "Who put that option there? F@ck that guy!",
+      "bg": "",
+      "option": [],
+      "transition": null,
+      "requiredFlag": "rotate_sprite"
+    },
+    "11": {
+      "person": {
+        "name": "Unknown",
+        "sprite": ""
+      },
+      "dialogue": "Wait. There's more?",
+      "bg": "",
+      "option": [
+        {
+          "label": "Move left",
+          "next": 12,
+          "flag": "move_left",
+          "lock": "move_left"
+        },
+        {
+          "label": "Move right",
+          "next": 12,
+          "flag": "move_right",
+          "lock": "move_right"
+        }
+      ],
+      "transition": null
+    },
+    "12": {
+      "person": {
+        "name": "Unknown",
+        "sprite": "",
+        "animate": {
+          "move": {
+            "direction": "",
+            "value": 10
+          }
+        }
+      },
+      "dialogue": "Hey. I'm not a dog. you know. This feels utterly humiliated.",
+      "bg": "",
+      "option": [],
+      "transition": null,
+      "requiredFlag": ["move_left", "move_right"],
+      "condition": { 
+        "all": false,  
+        "true": 13, 
+        "false": 11 
+      }
+    },
+    "13": {
         "person": {
             "name": "Unknown",
             "sprite": ""
           },
-        "dialogue": "Now you see. The is a basic example of dialogue system. Build with json and JavaScript. Have fun.",
+        "dialogue": "Anyway. The is a basic example of dialogue system. Build with json and JavaScript. Have fun.",
         "bg": "",
         "option": [],
         "transition": null
