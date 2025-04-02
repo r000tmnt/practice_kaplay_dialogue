@@ -20,6 +20,7 @@ import dialogueStore, {
 // Components
 import DialogueControl from './components/dialogue/control';
 import DialogueLog from './components/dialogue/log';
+import DialogueOption from './components/dialogue/option';
 
 const { 
   scene, 
@@ -32,7 +33,9 @@ const {
   loop,
   opacity,
   rotate,
-  animate
+  animate,
+  vec2,
+  width,
 } = k
 
 const conversation = dialogue.start
@@ -61,10 +64,6 @@ const initScene = () => {
 if(typeof window !== 'undefined') initScene()
 
 function App() {
-  // Scale the ui
-  // Reference from: https://jslegenddev.substack.com/p/how-to-display-an-html-based-ui-on
-  // const ui = document.querySelector(".ui");
-
   const [isVisible, setIsVisible] = useState(false)
   const [showOption, setShowOption] = useState(false)
 
@@ -80,6 +79,10 @@ function App() {
   const [dispalyLog, setDisplayLog] = useState(false)
   const [clickLock, setClickLock] = useState(false)
   const [timer, setTimer] = useState({})
+  // If the flag(s) matched
+  const [flagMatched, setFlagMatched] = useState(false)
+  // Where to move the sprite
+  const [direction, setDirection] = useState('')
   const dispatch = useDispatch()
   const getStoreState = (target) => {
     return dialogueStore.getState()[target]
@@ -92,6 +95,7 @@ function App() {
   const uiRef = useRef(null);
 
   // #region Scale UI
+  // Reference from: https://jslegenddev.substack.com/p/how-to-display-an-html-based-ui-on
   const scaleUI = () => {
     console.log(uiRef)
     if(uiRef.current){
@@ -136,8 +140,12 @@ function App() {
     console.log(option)
 
     // Set flag. Set points...etc.
-    if(option.flag) 
+    if(option.flag) {
       dispatch(setFlag(option.flag))
+      if(option.flag.includes('move')){
+        setDirection(option.flag.split('_')[1])
+      }
+    }
 
     if(option.point) {
       dispatch(setPoint(Object.values(point))) // ex. { friendly: 10 } => ['friendly', 10]
@@ -174,23 +182,106 @@ function App() {
   // #endregion
 
   // #region Display Dialogue
+  const flagCheck = (index) => {
+    // If the requiredFlag is an array
+    if(Array.isArray(conversation[index].requiredFlag)){
+      let matched = conversation[index].requiredFlag.every((item) => flag[item])
+      setFlagMatched(matched)
+      return matched
+    }
+    else
+    // If the requiredFlag is a string
+    if(conversation[index].requiredFlag && !flag[conversation[index].requiredFlag] ){
+      // If the flag didn't match
+      // Find the next part of the conversation
+      for(let i= index + 1; i < Object.entries(conversation).length; i++){
+        if(!conversation[i].requiredFlag){
+          dispatch(setIndex(i))
+          break;
+        }
+      }
+      setFlagMatched(false)
+      return false
+    }else{
+      // If the flag matches
+      setFlagMatched(true)
+      return true
+    }
+  } 
+
+  const setAnimation = (person, index) => {
+    // Stop current playing animation if any
+    if(people[index].getCurAnim()) people[index].stop()
+    // Stop current playing animation which came from the animate component
+    if(people[index].animation.duration > 0) people[index].unanimateAll()
+    // If the angle is off, reset the number
+    if(people[index].angle > 0) people[index].rotateTo(0)
+    // If the sprite position moved
+    // TODO - Back to default position if needed, which could be varied
+    // if(people[index].pos.x > 0 || people[index].pos.y > 0) people[index].moveTo(0, 0)
+
+    // If there is animation to play
+    if(person.animate){
+      const animation_name = Object.entries(person.animate)[0][0]
+
+      if(animation_name === 'rotate'){
+        people[index].animate("angle", [0, 360], {
+          duration: 2,
+          direction: person.animate[animation_name].direction,
+          // loops: 1
+        })
+
+        people[index].animation.seek(0)
+      }
+
+      if(animation_name.includes('move')){
+        let newPosition = {}
+
+        switch(direction){
+          case 'left': {
+            const gameWidth = width()
+            console.log(gameWidth)
+            newPosition = vec2(-gameWidth * (person.animate.move.value / 100), 0)
+          }
+          break;
+          case 'right': {
+            const gameWidth = width()
+            console.log(gameWidth)
+            newPosition = vec2(gameWidth * (person.animate.move.value / 100), 0)
+          }
+          break;
+          // And more...
+        }
+
+        people[index].tween(people[index].pos, newPosition, 0.5, (p) => people[index].pos = p)
+
+        // people[index].animate("pos", [people[index].pos, newPosition], {
+        //   duration: 5,
+        //   loops: 1
+        // })
+
+        // people[index].onUpdate(() => {
+           // const deltaTime = dt()
+           // const times = Math.floor((deltaTime % 2) / 2)
+           // people[index].pos = lerp(people[index].pos, newPosition, times)
+          
+        // })
+      }
+    }
+  }
+
   const displayDialogue = (index) => {
     if(conversation[index]){
       // Check flag
-      if(conversation[index].requiredFlag && !flag[conversation[index].requiredFlag] ){
-        // If the flag didn't match
-        // Find the next part of the conversation
-        for(let i= index + 1; i < Object.entries(conversation).length; i++){
-          if(!conversation[i].requiredFlag){
-            dispatch(setIndex(i))
-            break;
-          }
-        }
-        return
-      }
+      const flagMatched = flagCheck(index)
 
       // Check point
 
+
+      // If the condition is allowd to be matched partially
+      if(conversation[index].condition && !conversation[index].condition.all && !flagMatched) {
+        // Do nothing, continue with the rest
+      } else if(!flagMatched) return
 
       // Create sprites
       if(!bg.sprite) setBg(add([sprite(conversation[index].bg), pos(0, 0)]))
@@ -209,6 +300,7 @@ function App() {
           pos(0, 0),
           opacity(1),
           rotate(0),
+          k.timer(),
           animate()
         ])
       } else {
@@ -228,20 +320,8 @@ function App() {
         dispatch(setName(conversation[index].person.name)) 
       }
 
-      // If there is animation to play
-      if(person.animate){
-        const animation_name = Object.entries(person.animate)[0][0]
-
-        if(animation_name === 'rotate'){
-          people[peopleIndex].animate("angle", [0, 360], {
-            duration: 2,
-            direction: person.anition[animation_name].direction,
-            // loops: 1
-          })
-
-          people[peopleIndex].animate.seek(0)
-        }
-      }
+      // Reset and play animation
+      setAnimation(person, peopleIndex)
 
       // Dispalay dialouge
       if(mode === 'AUTO'){
@@ -277,7 +357,6 @@ function App() {
 
   const handleContinue = () => {
     console.log('clicked')
-    console.log(timer)
     
     if(!clickLock){
       setClickLock(true)
@@ -299,16 +378,24 @@ function App() {
             // If there are transitions to play
           }
 
-          const next = index + 1
-          if(conversation[next]){
+          // If the requiredFlag is an array
+          if(Array.isArray(conversation[index].requiredFlag)){
             dispatch(setLog(`${name.length? `${name}: ` : ''}${dialogue}`))
-            console.log('clear dialogue box by click')
             dispatch(setDialogue(''))
-            dispatch(setIndex(next))
+            // Go the index whether the flags matched or not
+            dispatch(setIndex(conversation[index].condition[String(flagMatched)]))
           }else{
-            // TODO - If no more dialogue
-            dispatch(clearLog())
-            stopTimer()
+            const next = index + 1
+            if(conversation[next]){
+              dispatch(setLog(`${name.length? `${name}: ` : ''}${dialogue}`))
+              console.log('clear dialogue box by click')
+              dispatch(setDialogue(''))
+              dispatch(setIndex(next))
+            }else{
+              // TODO - If no more dialogue
+              dispatch(clearLog())
+              stopTimer()
+            }            
           }
         }
       }  
@@ -369,16 +456,7 @@ function App() {
 
       <DialogueControl isVisible={isVisible} />
 
-      <ul className="option center text-center" style={{ visibility: showOption ? 'visible' : 'hidden' }}>
-        {/* <li v-for="opt in conversarion" key="e" onClick={optionClick}>{  }</li> */}
-        {
-          conversation[index].option.map((opt, i) => {
-            return (
-              <li className='bg-white' key={i} onClick={() => optionClick(opt)}>{ opt.label }</li>
-            )
-          })
-        }
-      </ul>
+      <DialogueOption showOption={showOption} optionClick={optionClick} dialogue={conversation[index]} />
 
       <div 
         className='dialogue_wrapper' 
